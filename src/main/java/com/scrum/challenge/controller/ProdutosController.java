@@ -1,4 +1,4 @@
-package com.petweb.controller;
+package com.scrum.challenge.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
