@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/produtos")
-public class ProdutosController {
+@RequestMapping("index")
+public class IndexController {
 	
 	@GetMapping
 	public ModelAndView index(Model model) {
