@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.bson.types.ObjectId;
+
 @Entity
 @Table(name = "tbl_quest")
 public class Quest implements Serializable	{
@@ -19,6 +21,8 @@ public class Quest implements Serializable	{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	private ObjectId objectId;
 	
 	private String title;
 	
@@ -39,35 +43,20 @@ public class Quest implements Serializable	{
 	public Quest() {
 	}
 
-	public Quest(Long id, String title, String description, LocalDateTime beginDate, LocalDateTime expectedEndDate,
-			LocalDateTime endDate, Sprint sprint, Hero assignedHero) {
-		this.id = id;
-		this.title = title;
-		this.description = description;
-		this.beginDate = beginDate;
-		this.expectedEndDate = expectedEndDate;
-		this.endDate = endDate;
-		this.sprint = sprint;
-		this.assignedHero = assignedHero;
-	}
-
-	public Quest(String title, String description, LocalDateTime beginDate, LocalDateTime expectedEndDate,
-			LocalDateTime endDate, Sprint sprint, Hero assignedHero) {
-		this.title = title;
-		this.description = description;
-		this.beginDate = beginDate;
-		this.expectedEndDate = expectedEndDate;
-		this.endDate = endDate;
-		this.sprint = sprint;
-		this.assignedHero = assignedHero;
-	}
-
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public ObjectId getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(ObjectId objectId) {
+		this.objectId = objectId;
 	}
 
 	public String getTitle() {
@@ -124,6 +113,11 @@ public class Quest implements Serializable	{
 
 	public void setAssignedHero(Hero assignedHero) {
 		this.assignedHero = assignedHero;
+	}
+	
+	public Quest generateId() {
+		setObjectId(new ObjectId());
+		return this;
 	}
 
 	@Override

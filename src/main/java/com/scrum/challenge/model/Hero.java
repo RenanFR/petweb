@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.bson.types.ObjectId;
+
 @Entity
 @Table(name = "tbl_hero")
 public class Hero {
@@ -15,6 +17,8 @@ public class Hero {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Long id;
+	
+	private ObjectId objectId;
 	
 	private String name;
 	
@@ -26,6 +30,14 @@ public class Hero {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public ObjectId getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(ObjectId objectId) {
+		this.objectId = objectId;
 	}
 
 	public String getName() {

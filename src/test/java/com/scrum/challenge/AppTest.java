@@ -1,4 +1,4 @@
-package com.petweb;
+package com.scrum.challenge;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
