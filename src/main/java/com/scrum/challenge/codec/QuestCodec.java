@@ -13,7 +13,9 @@ import org.bson.codecs.DecoderContext;
 import org.bson.codecs.EncoderContext;
 import org.bson.types.ObjectId;
 
+import com.scrum.challenge.model.Hero;
 import com.scrum.challenge.model.Quest;
+import com.scrum.challenge.model.Sprint;
 
 public class QuestCodec implements CollectibleCodec<Quest> {
 	
@@ -52,8 +54,17 @@ public class QuestCodec implements CollectibleCodec<Quest> {
 
 	@Override
 	public Quest decode(BsonReader bsonReader, DecoderContext decoderContext) {
-		// TODO Auto-generated method stub
-		return null;
+		Document document = codec.decode(bsonReader, decoderContext);
+		Quest quest = new Quest(document.getObjectId("_id"), 
+				document.getString("title"), 
+				document.getString("description"),
+				LocalDateTime.parse(document.getString("beginDate")),
+				LocalDateTime.parse(document.getString("expectedEndDate")),
+				LocalDateTime.parse(document.getString("endDate")),
+				new Sprint(new ObjectId(document.getString("idSprint"))), 
+				new Hero(document.getString("nameHero"))
+		);
+		return quest;
 	}
 
 	@Override

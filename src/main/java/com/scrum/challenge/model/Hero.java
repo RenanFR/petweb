@@ -24,6 +24,11 @@ public class Hero {
 	
 	private BigDecimal xp;
 
+	public Hero(String name) {
+		super();
+		this.name = name;
+	}
+
 	public Long getId() {
 		return id;
 	}

@@ -24,6 +24,11 @@ public class Sprint {
 	@OneToMany(mappedBy = "sprint")
 	private List<Quest> quests;
 
+	public Sprint(ObjectId id) {
+		super();
+		this.objectId = id;
+	}
+
 	public Long getId() {
 		return id;
 	}
