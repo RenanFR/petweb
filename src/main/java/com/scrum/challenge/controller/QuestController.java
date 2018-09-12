@@ -32,4 +32,11 @@ public class QuestController {
 		return modelAndView;
 	}
 	
+	@GetMapping
+	public ModelAndView quests() {
+		ModelAndView modelAndView = new ModelAndView("quest/list");
+		return modelAndView;
+		
+	}
+	
 }
