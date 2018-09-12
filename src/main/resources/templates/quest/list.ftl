@@ -12,23 +12,23 @@
 			<table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Rendering engine</th>
-                  <th>Browser</th>
-                  <th>Platform(s)</th>
-                  <th>Engine version</th>
-                  <th>CSS grade</th>
+                  <th><@spring.message "title"/></th>
+                  <th><@spring.message "description"/></th>
+                  <th><@spring.message "beginDate"/></th>
+                  <th><@spring.message "expectedEndDate"/></th>
+                  <th><@spring.message "endDate"/></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 4.0
-                  </td>
-                  <td>Win 95+</td>
-                  <td> 4</td>
-                  <td>X</td>
-                </tr>
+					<#list quests as q>
+					<tr>
+					    <td>${q.title}</td>
+					    <td>${q.description}</td>
+					    <td>${q.beginDate}</td>
+					    <td>${q.expectedEndDate}</td>
+					    <td>${q.endDate}</td>
+					</tr>
+					</#list>                
 				</tbody>
 			</table>
 			</div>

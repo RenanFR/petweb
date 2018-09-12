@@ -59,15 +59,22 @@ public class QuestCodec implements CollectibleCodec<Quest> {
 	@Override
 	public Quest decode(BsonReader bsonReader, DecoderContext decoderContext) {
 		Document document = codec.decode(bsonReader, decoderContext);
+		Sprint sprint = null;
+		Hero assignedHero = null;
+		if (document.getString("idSprint") != null) {
+			sprint = new Sprint(new ObjectId(document.getString("idSprint")));
+		}
+		if (document.getString("nameHero") != null) {
+			assignedHero = new Hero(document.getString("nameHero"));
+		}
 		Quest quest = new Quest(document.getObjectId("_id"), 
 				document.getString("title"), 
 				document.getString("description"),
 				LocalDateTime.parse(document.getString("beginDate")),
 				LocalDateTime.parse(document.getString("expectedEndDate")),
 				LocalDateTime.parse(document.getString("endDate")),
-				new Sprint(new ObjectId(document.getString("idSprint"))), 
-				new Hero(document.getString("nameHero"))
-		);
+				sprint,
+				assignedHero);
 		return quest;
 	}
 

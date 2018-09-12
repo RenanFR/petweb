@@ -35,6 +35,7 @@ public class QuestController {
 	@GetMapping
 	public ModelAndView quests() {
 		ModelAndView modelAndView = new ModelAndView("quest/list");
+		modelAndView.addObject("quests", questService.findAll());
 		return modelAndView;
 		
 	}
