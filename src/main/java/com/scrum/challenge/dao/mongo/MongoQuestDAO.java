@@ -11,12 +11,13 @@ import com.mongodb.MongoClientOptions;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.scrum.challenge.codec.QuestCodec;
+import com.scrum.challenge.dao.QuestDAO;
 import com.scrum.challenge.model.Quest;
 
-@Repository
-public class MongoQuestDAO {
+@Repository("mongoQuestDAO")
+public class MongoQuestDAO implements QuestDAO{
 	
-	public void	save(Quest quest) {
+	public Quest save(Quest quest) {
 		Codec<Document> codec = MongoClient.getDefaultCodecRegistry().get(Document.class);
 		QuestCodec questCodec = new QuestCodec(codec);
 		CodecRegistry codecRegistry = CodecRegistries.fromRegistries(MongoClient.getDefaultCodecRegistry(), CodecRegistries.fromCodecs(questCodec));
@@ -26,5 +27,6 @@ public class MongoQuestDAO {
 		MongoCollection<Quest> mongoCollection = mongoDatabase.getCollection("quests", Quest.class);
 		mongoCollection.insertOne(quest);
 		mongoClient.close();
+		return quest;
 	}
 }

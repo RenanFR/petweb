@@ -27,23 +27,27 @@ public class QuestCodec implements CollectibleCodec<Quest> {
 
 	@Override
 	public void encode(BsonWriter bsonWriter, Quest quest, EncoderContext context) {
+		Document questDocument = new Document();
 		String description = quest.getDescription();
 		String title = quest.getTitle();
 		LocalDateTime beginDate = quest.getBeginDate();
 		LocalDateTime expectedEndDate = quest.getExpectedEndDate();
 		LocalDateTime endDate = quest.getEndDate();
-		String nameHero = quest.getAssignedHero().getName();
+		if (quest.getAssignedHero() != null) {
+			String nameHero = quest.getAssignedHero().getName();
+			questDocument.append("nameHero", nameHero);
+		}
 		ObjectId objectId = quest.getObjectId();
-		Long idSprint = quest.getSprint().getId();
-		Document questDocument = new Document();
+		if (quest.getSprint() != null) {
+			Long idSprint = quest.getSprint().getId();
+			questDocument.append("idSprint", idSprint);
+		}
 		questDocument.append("_id", objectId);
 		questDocument.append("title", title);
 		questDocument.append("description", description);
-		questDocument.append("nameHero", nameHero);
-		questDocument.append("beginDate", beginDate);
-		questDocument.append("expectedEndDate", expectedEndDate);
-		questDocument.append("endDate", endDate);
-		questDocument.append("idSprint", idSprint);
+		questDocument.append("beginDate", beginDate.toString());
+		questDocument.append("expectedEndDate", expectedEndDate.toString());
+		questDocument.append("endDate", endDate.toString());
 		codec.encode(bsonWriter, questDocument, context);
 	}
 
