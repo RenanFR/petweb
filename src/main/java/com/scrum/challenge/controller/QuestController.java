@@ -1,5 +1,6 @@
 package com.scrum.challenge.controller;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,8 @@ public class QuestController {
 	@PostMapping
 	public ModelAndView save(@ModelAttribute("quest") Quest quest) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/quest/form");
+		ObjectId objectId = new ObjectId();
+		quest.setObjectId(objectId);
 		questService.save(quest);
 		return modelAndView;
 	}
