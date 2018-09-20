@@ -28,7 +28,7 @@ public class QuestController {
 	
 	@PostMapping
 	public ModelAndView save(@ModelAttribute("quest") Quest quest) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/quest/form");
+		ModelAndView modelAndView = new ModelAndView("redirect:/quest/");
 		ObjectId objectId = new ObjectId();
 		quest.setObjectId(objectId);
 		questService.save(quest);

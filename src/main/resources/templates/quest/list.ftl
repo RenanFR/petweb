@@ -1,5 +1,9 @@
 <#import "../lib/utils.ftl" as u>
 <#import "/spring.ftl" as spring />
+
+<#assign form = false in u>
+<#assign list = true in u>
+
 <@u.page>
       <div class="row">
         <div class="col-xs-12">

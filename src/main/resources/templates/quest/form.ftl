@@ -1,10 +1,14 @@
 <#import "../lib/utils.ftl" as u>
 <#import "/spring.ftl" as spring />
+
+<#assign form = true in u>
+<#assign list = false in u>
+
 <@u.page>
 	<div class="row">
 		<div class="box box-primary">
 	        <div class="box-header with-border">
-	          <h3 class="box-title">Quick Example</h3>
+	          <h3 class="box-title"><@spring.message "newQuest"/></h3>
 	        </div>		
 	        <!-- form start -->
 	        <form action="/scrum-challenge/quest" method="POST" role="form">

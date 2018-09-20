@@ -31,6 +31,7 @@
 <#assign bootstrapjs = "js/bootstrap/bootstrap.min.js">
 <#assign jqueryui = "http://code.jquery.com/ui/1.11.2/jquery-ui.min.js">
 <#assign jquery = "js/plugins/jQuery/jQuery-2.1.3.min.js">
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -345,8 +346,8 @@
                 <i class="fa fa-tasks"></i> <span><@spring.message "quest"/></span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="<@spring.url '/'/>quest/"><i class="fa fa-circle-o"></i><@spring.message "listQuests"/> </a></li>
-                <li><a href="<@spring.url '/'/>quest/form"><i class="fa fa-circle-o"></i> <@spring.message "newQuest"/></a></li>
+                <li ${list?then('class="active"', '')}><a href="<@spring.url '/'/>quest/"><i class="fa fa-circle-o"></i><@spring.message "listQuests"/> </a></li>
+                <li ${form?then('class="active"', '')}><a href="<@spring.url '/'/>quest/form"><i class="fa fa-circle-o"></i> <@spring.message "newQuest"/></a></li>
               </ul>
             </li>
             <li class="treeview">
