@@ -31,6 +31,8 @@
 <#assign bootstrapjs = "js/bootstrap/bootstrap.min.js">
 <#assign jqueryui = "http://code.jquery.com/ui/1.11.2/jquery-ui.min.js">
 <#assign jquery = "js/plugins/jQuery/jQuery-2.1.3.min.js">
+<#assign backbone = "js/plugins/backbone/backbone.js">
+<#assign underscore = "js/plugins/backbone/underscore.js">
 
 <!DOCTYPE html>
 <html>
@@ -545,6 +547,9 @@
 
     <!-- AdminLTE for demo purposes -->
     <script src="<@spring.url '/'/>${demo}" type="text/javascript"></script>
+    
+    <script src="<@spring.url '/'/>${underscore}" type="text/javascript"></script>
+    <script src="<@spring.url '/'/>${backbone}" type="text/javascript"></script>
   </body>
 </html>
 </#macro>

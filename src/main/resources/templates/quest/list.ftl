@@ -13,9 +13,10 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-			<table id="example2" class="table table-bordered table-hover">
+			<table id="questList" class="table table-bordered table-hover">
                 <thead>
                 <tr>
+                  <th><@spring.message "actions"/></th>
                   <th><@spring.message "title"/></th>
                   <th><@spring.message "description"/></th>
                   <th><@spring.message "beginDate"/></th>
@@ -26,6 +27,10 @@
                 <tbody>
 					<#list quests as q>
 					<tr>
+					    <td>
+						    <i class="fa fa-trash fa-2x"></i>
+							<i class="fa fa-edit fa-2x"></i>
+					    </td>
 					    <td>${q.title}</td>
 					    <td>${q.description}</td>
 					    <td>${q.beginDate}</td>
