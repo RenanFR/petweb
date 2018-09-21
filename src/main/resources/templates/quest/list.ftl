@@ -28,8 +28,8 @@
 					<#list quests as q>
 					<tr>
 					    <td>
-						    <i class="fa fa-trash fa-2x"></i>
-							<i class="fa fa-edit fa-2x"></i>
+					    	<a href="#" class="delete" data-id="${q.objectId}"><i class="fa fa-trash fa-2x"></i></a>
+					    	<a href="#" class="edit" data-id="${q.objectId}"><i class="fa fa-edit fa-2x"></i></a>
 					    </td>
 					    <td>${q.title}</td>
 					    <td>${q.description}</td>

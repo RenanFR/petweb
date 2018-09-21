@@ -7,6 +7,7 @@ import org.bson.Document;
 import org.bson.codecs.Codec;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Repository;
 
 import com.mongodb.MongoClient;
@@ -14,6 +15,7 @@ import com.mongodb.MongoClientOptions;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import com.scrum.challenge.codec.QuestCodec;
 import com.scrum.challenge.dao.QuestDAO;
 import com.scrum.challenge.model.Quest;
@@ -43,6 +45,13 @@ public class MongoQuestDAO implements QuestDAO{
 		mongoClient.close();
 		return quest;
 	}
+	
+	public Quest findById(ObjectId id) {
+		connect();
+		Quest quest = mongoCollection.find(Filters.eq("_id", id)).first();
+		mongoClient.close();
+		return quest;
+	}
 
 
 	@Override
@@ -55,5 +64,12 @@ public class MongoQuestDAO implements QuestDAO{
 			quests.add(nextQuest);
 		}
 		return quests;
+	}
+
+	@Override
+	public void delete(Quest quest) {
+		connect();
+		mongoCollection.deleteOne(Filters.eq("_id", quest.getObjectId()));
+		mongoClient.close();
 	}
 }

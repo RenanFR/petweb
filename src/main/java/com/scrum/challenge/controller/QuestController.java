@@ -1,14 +1,16 @@
 package com.scrum.challenge.controller;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.scrum.challenge.model.Quest;
@@ -43,10 +45,13 @@ public class QuestController {
 		modelAndView.addObject("quests", questService.findAll());
 		return modelAndView;
 	}
-	
-	@DeleteMapping
-	public ModelAndView deleteQuest(@RequestParam("id")Long id) {
+	@DeleteMapping(value = "{id}")
+	public ModelAndView deleteQuest(@PathVariable("id")ObjectId id, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/quest/");
+		Quest quest = questService.findById(id);
+		questService.delete(quest);
+		response.setHeader("Location", "/quest/");
+		response.setStatus(303);
 		return modelAndView;
 	}
 	

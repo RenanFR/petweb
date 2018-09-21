@@ -2,6 +2,7 @@ package com.scrum.challenge.service;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -22,5 +23,13 @@ public class QuestService {
 	
 	public List<Quest> findAll() {
 		return questDAO.findAll();
+	}
+	
+	public Quest findById(ObjectId id) {
+		return questDAO.findById(id);
+	}
+	
+	public void delete(Quest quest) {
+		questDAO.delete(quest);
 	}
 }

@@ -33,6 +33,7 @@
 <#assign jquery = "js/plugins/jQuery/jQuery-2.1.3.min.js">
 <#assign backbone = "js/plugins/backbone/backbone.js">
 <#assign underscore = "js/plugins/backbone/underscore.js">
+<#assign questListView = "js/pages/quest/list.js">
 
 <!DOCTYPE html>
 <html>
@@ -550,6 +551,7 @@
     
     <script src="<@spring.url '/'/>${underscore}" type="text/javascript"></script>
     <script src="<@spring.url '/'/>${backbone}" type="text/javascript"></script>
+    <script src="<@spring.url '/'/>${questListView}" type="text/javascript"></script>
   </body>
 </html>
 </#macro>

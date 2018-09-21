@@ -1,23 +1,41 @@
-var QuestListView = Backbone.View.extend({
-	tagName: "li",
+var Quest = Backbone.Model.extend({
 
-	className: "vehicle",
+	idAttribute: "objectId",
 
-	events: {
-		"click .delete": "onDelete",
+	urlRoot: "/scrum-challenge/quest",
+
+	validate: function(attrs){
 	},
 
+	start: function(){
+	}
+	
+});
+var QuestListView = Backbone.View.extend({
+	
+    el: $('#questList'),
+
+	events: {
+		"click .delete": "onDelete"
+	},
+
+    initialize: function() {
+        this.render();
+    },	
+
 	render: function() {
-		var source = $("#questList").html();
-		var template = _.template(source);
-
-		this.$el.html(template(this.model.toJSON()));
-		this.$el.attr("data-color", this.model.get("color"));
-
+		console.log('QuestListView');
 		return this;
 	},
 
-	onDelete: function(){
-		this.remove();
+	onDelete: function(e){
+		e.preventDefault();
+		this.model.set({
+			objectId: $(e.target.parentElement).data('id')
+		});
+		this.model.destroy();
 	}
+});
+var questListView = new QuestListView({
+	  model: new Quest()
 });
