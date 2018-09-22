@@ -24,7 +24,6 @@ var QuestListView = Backbone.View.extend({
     },	
 
 	render: function() {
-		console.log('QuestListView');
 		return this;
 	},
 
@@ -34,6 +33,7 @@ var QuestListView = Backbone.View.extend({
 			objectId: $(e.target.parentElement).data('id')
 		});
 		this.model.destroy();
+		window.location.reload(true);
 	}
 });
 var questListView = new QuestListView({
