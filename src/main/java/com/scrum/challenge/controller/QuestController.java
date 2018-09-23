@@ -1,5 +1,7 @@
 package com.scrum.challenge.controller;
 
+import java.util.List;
+
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.scrum.challenge.model.Quest;
@@ -37,7 +41,13 @@ public class QuestController {
 		return modelAndView;
 	}
 	
-	@GetMapping
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public @ResponseBody List<Quest> findAll() {
+		List<Quest> quests = questService.findAll();
+		return quests;
+	}	
+	
+	@RequestMapping(method = {RequestMethod.GET, RequestMethod.DELETE})
 	public ModelAndView quests() {
 		ModelAndView modelAndView = new ModelAndView("quest/list");
 		modelAndView.addObject("quests", questService.findAll());
@@ -46,10 +56,9 @@ public class QuestController {
 	
 	@DeleteMapping(value = "{id}")
 	public ModelAndView deleteQuest(@PathVariable("id")ObjectId id) {
-		ModelAndView modelAndView = new ModelAndView("quest/list");
+		ModelAndView modelAndView = new ModelAndView("redirect:/quest/");
 		Quest quest = questService.findById(id);
 		questService.delete(quest);
-		modelAndView.addObject("quests", questService.findAll());
 		return modelAndView;
 	}
 	

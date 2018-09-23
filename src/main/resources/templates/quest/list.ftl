@@ -25,19 +25,13 @@
                 </tr>
                 </thead>
                 <tbody>
-					<#list quests as q>
-					<tr>
-					    <td>
-					    	<a href="#" class="delete" data-id="${q.objectId}"><i class="fa fa-trash fa-2x"></i></a>
-					    	<a href="#" class="edit" data-id="${q.objectId}"><i class="fa fa-edit fa-2x"></i></a>
-					    </td>
-					    <td>${q.title}</td>
-					    <td>${q.description}</td>
-					    <td>${q.beginDate}</td>
-					    <td>${q.expectedEndDate}</td>
-					    <td>${q.endDate}</td>
-					</tr>
-					</#list>                
+                	<script id="questTemplate" type="text/template">
+                		<%= title %>
+                		<%= description %>
+                		<%= beginDate %>
+                		<%= expectedEndDate %>
+                		<%= endDate %>
+                	</script>
 				</tbody>
 			</table>
 			</div>

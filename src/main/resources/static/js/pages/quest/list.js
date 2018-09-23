@@ -1,41 +1,62 @@
 var Quest = Backbone.Model.extend({
+	
+	idAttribute: "title",
 
-	idAttribute: "objectId",
+});
 
-	urlRoot: "/scrum-challenge/quest",
-
-	validate: function(attrs){
-	},
-
-	start: function(){
-	}
+var Quests = Backbone.Collection.extend({
+	
+	url: '/scrum-challenge/quest/list',
+	
+	model: Quest
 	
 });
-var QuestListView = Backbone.View.extend({
+
+var QuestView = Backbone.View.extend({
 	
-    el: $('#questList'),
-
-	events: {
+	  tagName: 'td',
+	  
+	  events: {
 		"click .delete": "onDelete"
-	},
-
-    initialize: function() {
-        this.render();
-    },	
-
-	render: function() {
-		return this;
-	},
-
-	onDelete: function(e){
+	  },	  
+	  
+	  render: function() {
+		var source = $("#questTemplate").html();
+		var template = _.template(source);
+		this.$el.html(template(this.model.toJSON()));
+	    return this;
+	  },
+	  
+	  onDelete: function(e){
 		e.preventDefault();
 		this.model.set({
 			objectId: $(e.target.parentElement).data('id')
 		});
 		this.model.destroy();
-		window.location.reload(true);
+	  }	  
+	  
+});
+
+var QuestListView = Backbone.View.extend({
+	
+	tagName: "tr",
+	
+	render: function(){
+		this.collection.each(function(quest){
+			var questView = new QuestView({ model: quest });
+			this.$el.append(questView.render().$el);
+		}, this);
+		return this;
 	}
+
 });
-var questListView = new QuestListView({
-	  model: new Quest()
-});
+
+var quests = new Quests([
+	new Quest({ title: "t", description: "d", beginDate: "b", expectedEndDate: "e", endDate: "e"    })
+]);
+//var quests = new Quests();
+//
+//quests.fetch();
+
+var questListView = new QuestListView({ collection: quests });
+$("tbody").html(questListView.render().$el);
