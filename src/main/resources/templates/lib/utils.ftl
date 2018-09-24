@@ -548,10 +548,10 @@
 
     <!-- AdminLTE for demo purposes -->
     <script src="<@spring.url '/'/>${demo}" type="text/javascript"></script>
-    
     <script src="<@spring.url '/'/>${underscore}" type="text/javascript"></script>
     <script src="<@spring.url '/'/>${backbone}" type="text/javascript"></script>
     <script src="<@spring.url '/'/>${questListView}" type="text/javascript"></script>
+    
   </body>
 </html>
 </#macro>

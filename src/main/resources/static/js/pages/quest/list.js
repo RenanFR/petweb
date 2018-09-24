@@ -5,9 +5,6 @@ var Quest = Backbone.Model.extend({
 	urlRoot: "/scrum-challenge/quest",
 
 	validate: function(attrs){
-	},
-
-	start: function(){
 	}
 	
 });
@@ -24,7 +21,6 @@ var QuestListView = Backbone.View.extend({
     },	
 
 	render: function() {
-		console.log('QuestListView');
 		return this;
 	},
 
@@ -33,6 +29,10 @@ var QuestListView = Backbone.View.extend({
 		this.model.set({
 			objectId: $(e.target.parentElement).data('id')
 		});
+		$("a[data-id='" + $(e.target.parentElement)
+				.data('id') +"']")
+				.prop('disabled', true)
+				.css("color","red");
 		this.model.destroy();
 	}
 });

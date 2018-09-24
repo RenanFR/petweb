@@ -16,7 +16,7 @@
 			<table id="questList" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th><@spring.message "actions"/></th>
+                  <th><@spring.message "actions"/></th>                
                   <th><@spring.message "title"/></th>
                   <th><@spring.message "description"/></th>
                   <th><@spring.message "beginDate"/></th>
@@ -30,7 +30,7 @@
 					    <td>
 					    	<a href="#" class="delete" data-id="${q.objectId}"><i class="fa fa-trash fa-2x"></i></a>
 					    	<a href="#" class="edit" data-id="${q.objectId}"><i class="fa fa-edit fa-2x"></i></a>
-					    </td>
+					    </td>					
 					    <td>${q.title}</td>
 					    <td>${q.description}</td>
 					    <td>${q.beginDate}</td>

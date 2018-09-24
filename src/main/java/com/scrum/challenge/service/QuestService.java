@@ -32,4 +32,5 @@ public class QuestService {
 	public void delete(Quest quest) {
 		questDAO.delete(quest);
 	}
+	
 }

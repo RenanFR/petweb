@@ -14,6 +14,6 @@ public interface QuestDAO {
 	
 	Quest findById(ObjectId id);
 	
-	void delete(Quest quest);
+	void delete(Quest quest);	
 	
 }

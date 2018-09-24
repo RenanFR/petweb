@@ -45,13 +45,6 @@ public class MongoQuestDAO implements QuestDAO{
 		mongoClient.close();
 		return quest;
 	}
-	
-	public Quest findById(ObjectId id) {
-		connect();
-		Quest quest = mongoCollection.find(Filters.eq("_id", id)).first();
-		mongoClient.close();
-		return quest;
-	}
 
 
 	@Override
@@ -65,11 +58,20 @@ public class MongoQuestDAO implements QuestDAO{
 		}
 		return quests;
 	}
-
+	
+	@Override
+	public Quest findById(ObjectId id) {
+		connect();
+		Quest quest = mongoCollection.find(Filters.eq("_id", id)).first();
+		mongoClient.close();
+		return quest;
+	}
+	
 	@Override
 	public void delete(Quest quest) {
 		connect();
 		mongoCollection.deleteOne(Filters.eq("_id", quest.getObjectId()));
 		mongoClient.close();
-	}
+	}	
+	
 }
