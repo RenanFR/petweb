@@ -22,22 +22,6 @@ public class App	{
     }
     
     @Bean
-    public Formatter<LocalDateTime> formatter() {
-    	return new Formatter<LocalDateTime>() {
-			@Override
-			public String print(LocalDateTime object, Locale locale) {
-				return DateTimeFormatter.ISO_DATE_TIME.format(object);
-			}
-
-			@Override
-			public LocalDateTime parse(String text, Locale locale) throws ParseException {
-				return LocalDateTime.parse(text, DateTimeFormatter.ISO_DATE_TIME);
-			}
-    		
-		};
-    }
-    
-    @Bean
     public LocaleResolver localeResolver() {
     	SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
     	sessionLocaleResolver.setDefaultLocale(Locale.US);
@@ -50,4 +34,21 @@ public class App	{
     	localeChangeInterceptor.setParamName("locale");
     	return localeChangeInterceptor;
     }
+    
+    @Bean
+    public Formatter<LocalDateTime> formatter() {
+    	return new Formatter<LocalDateTime>() {
+    		@Override
+    		public String print(LocalDateTime object, Locale locale) {
+    			return DateTimeFormatter.ISO_DATE_TIME.format(object);
+    		}
+    		
+    		@Override
+    		public LocalDateTime parse(String text, Locale locale) throws ParseException {
+    			return LocalDateTime.parse(text, DateTimeFormatter.ISO_DATE_TIME);
+    		}
+    		
+    	};
+    }
+    
 }

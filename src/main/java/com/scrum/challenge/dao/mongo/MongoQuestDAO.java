@@ -16,6 +16,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.result.DeleteResult;
 import com.scrum.challenge.codec.QuestCodec;
 import com.scrum.challenge.dao.QuestDAO;
 import com.scrum.challenge.model.Quest;
@@ -70,7 +71,11 @@ public class MongoQuestDAO implements QuestDAO{
 	@Override
 	public void delete(Quest quest) {
 		connect();
-		mongoCollection.deleteOne(Filters.eq("_id", quest.getObjectId()));
+		ObjectId _id = quest.getObjectId();
+		DeleteResult delete = mongoCollection.deleteOne(Filters.eq("_id", _id));
+		if (delete.getDeletedCount() == 0) {
+			throw new RuntimeException("NÃO FOI POSSÍVEL ELIMINAR NENHUM DOCUMENTO COM O ID " + _id);
+		}
 		mongoClient.close();
 	}	
 	

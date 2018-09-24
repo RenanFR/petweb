@@ -1,4 +1,6 @@
 <#import "lib/utils.ftl" as u>
+<#assign form = false in u>
+<#assign list = false in u>
 <@u.page>
       <!-- Small boxes (Stat box) -->
       <div class="row">
