@@ -53,6 +53,13 @@ public class QuestController {
 		response.setHeader("Location", "/quest/");
 		response.setStatus(303);
 		return modelAndView;
-	}	
+	}
+	
+	@GetMapping(value = "edit/{id}")
+	public ModelAndView editQuest(@PathVariable("id")ObjectId id) {
+		ModelAndView modelAndView = new ModelAndView("quest/form");
+		modelAndView.addObject("quest", questService.findById(id));
+		return modelAndView;
+	}
 	
 }
