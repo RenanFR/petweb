@@ -32,8 +32,6 @@ public class QuestController {
 	@PostMapping
 	public ModelAndView save(@ModelAttribute("quest") Quest quest) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/quest/");
-		ObjectId objectId = new ObjectId();
-		quest.setObjectId(objectId);
 		questService.save(quest);
 		return modelAndView;
 	}
@@ -62,4 +60,11 @@ public class QuestController {
 		return modelAndView;
 	}
 	
+	@GetMapping(value = "{id}")
+	public ModelAndView detailsQuest(@PathVariable("id")ObjectId id) {
+		ModelAndView modelAndView = new ModelAndView("quest/details");
+		modelAndView.addObject("quest", questService.findById(id));
+		return modelAndView;
+		
+	}
 }

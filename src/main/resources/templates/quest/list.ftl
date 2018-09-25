@@ -31,7 +31,10 @@
 					    <td>
 					    	<a href="${context}/delete/${q.objectId}" class="delete" data-id="${q.objectId}"><i class="fa fa-trash fa-2x"></i></a>
 					    	<a href="${context}/edit/${q.objectId}" class="edit" data-id="${q.objectId}"><i class="fa fa-edit fa-2x"></i></a>
-					    </td>					
+						    <a href="${context}/${q.objectId}">
+							    <i class="fa fa-ellipsis-h"></i>
+						    </a>
+					    </td>
 					    <td>${q.title}</td>
 					    <td>${q.description}</td>
 					    <td>${q.beginDate}</td>

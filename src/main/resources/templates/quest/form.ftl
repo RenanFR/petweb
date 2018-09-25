@@ -13,6 +13,7 @@
 	        <!-- form start -->
 	        <form action="/scrum-challenge/quest" method="POST" role="form">
             <@spring.bind "quest" />
+            <@spring.formHiddenInput "quest.objectId"/>
 			<div class="box-body">
 			
             <div class="form-group">
