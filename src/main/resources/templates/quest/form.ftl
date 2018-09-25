@@ -17,27 +17,27 @@
 			
             <div class="form-group">
               <label for="title"><@spring.message "title"/></label>
-              <input type="text" class="form-control" id="title" name="title" placeholder="Enter title">
+			<@spring.formInput "quest.title" "class=form-control" "text"/>
             </div>
 			
             <div class="form-group">
               <label for="description"><@spring.message "description"/></label>
-              <input type="text" class="form-control" id="description" name="description" placeholder="Enter description">
+              <@spring.formInput "quest.description" "class=form-control" "text"/>
             </div>
             
             <div class="form-group">
               <label for="beginDate"><@spring.message "beginDate"/></label>
-              <input type="datetime-local" class="form-control" id="beginDate" name="beginDate" placeholder="Enter Begin Date">
+              <@spring.formInput "quest.beginDate" "class=form-control" "datetime-local"/>
             </div>
             
             <div class="form-group">
               <label for="expectedEndDate"><@spring.message "expectedEndDate"/></label>
-              <input type="datetime-local" class="form-control" id="expectedEndDate" name="expectedEndDate" placeholder="Enter expected end date">
+              <@spring.formInput "quest.expectedEndDate" "class=form-control" "datetime-local"/>
             </div>
             
             <div class="form-group">
               <label for="endDate"><@spring.message "endDate"/></label>
-              <input type="datetime-local" class="form-control" id="endDate" name="endDate" placeholder="Enter end date">
+              <@spring.formInput "quest.endDate" "class=form-control" "datetime-local"/>
             </div>
             
 		</div>
