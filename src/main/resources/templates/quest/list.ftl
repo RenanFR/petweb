@@ -3,6 +3,7 @@
 
 <#assign form = false in u>
 <#assign list = true in u>
+<#assign context = "http://localhost:9010/scrum-challenge/quest">
 
 <@u.page>
       <div class="row">
@@ -28,8 +29,8 @@
 					<#list quests as q>
 					<tr>
 					    <td>
-					    	<a href="#" class="delete" data-id="${q.objectId}"><i class="fa fa-trash fa-2x"></i></a>
-					    	<a href="#" class="edit" data-id="${q.objectId}"><i class="fa fa-edit fa-2x"></i></a>
+					    	<a href="${context}/delete/${q.objectId}" class="delete" data-id="${q.objectId}"><i class="fa fa-trash fa-2x"></i></a>
+					    	<a href="${context}/delete/${q.objectId}" class="edit" data-id="${q.objectId}"><i class="fa fa-edit fa-2x"></i></a>
 					    </td>					
 					    <td>${q.title}</td>
 					    <td>${q.description}</td>
