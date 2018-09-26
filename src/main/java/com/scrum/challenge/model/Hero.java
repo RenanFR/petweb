@@ -1,6 +1,7 @@
 package com.scrum.challenge.model;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,11 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.bson.types.ObjectId;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "tbl_hero")
-public class Hero {
+public class Hero implements UserDetails	{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Long id;
@@ -23,9 +28,13 @@ public class Hero {
 	private String name;
 	
 	private BigDecimal xp;
+	
+	private String password;
+	
+	public Hero() {
+	}
 
 	public Hero(String name) {
-		super();
 		this.name = name;
 	}
 
@@ -60,7 +69,47 @@ public class Hero {
 	public void setXp(BigDecimal xp) {
 		this.xp = xp;
 	}
+	
+	public Hero generateId() {
+		setObjectId(new ObjectId());
+		return this;
+	}	
 
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	@Override
+	public String getUsername() {
+		return name;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -93,6 +142,6 @@ public class Hero {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
+	}	
 
 }

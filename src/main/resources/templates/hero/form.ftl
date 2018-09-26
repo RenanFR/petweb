@@ -9,16 +9,16 @@
 		<div class="box box-primary">
 	        <div class="box-header with-border">
 	          <h3 class="box-title"><@spring.message "newQuest"/></h3>
-	        </div>
+	        </div>		
 	        <!-- form start -->
-	        <form action="/scrum-challenge/quest" method="POST" role="form">
-            <@spring.bind "quest" />
-            <@spring.formHiddenInput "quest.objectId"/>
+	        <form action="/scrum-challenge/hero" method="POST" role="form">
+	        <@spring.bind "hero" />
+            <@spring.formHiddenInput "hero.objectId"/>
 			<div class="box-body">
 			
             <div class="form-group">
-              <label for="title"><@spring.message "title"/></label>
-			<@spring.formInput "quest.title" "class=form-control" "text"/>
+              <label for="title"><@spring.message "name"/></label>
+			<@spring.formInput "hero.name" "class=form-control" "text"/>            
             </div>
 			
             <div class="form-group">
