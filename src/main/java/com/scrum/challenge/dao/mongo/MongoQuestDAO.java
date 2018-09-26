@@ -43,8 +43,7 @@ public class MongoQuestDAO implements QuestDAO{
 	public Quest save(Quest quest) {
 		connect();
 		if (quest.getObjectId() == null) {
-			ObjectId objectId = new ObjectId();
-			quest.setObjectId(objectId);			
+			quest.setObjectId(new ObjectId());
 			mongoCollection.insertOne(quest);
 		} else {
 			mongoCollection.updateOne(Filters.eq("_id", quest.getObjectId()), new Document("$set", quest));
