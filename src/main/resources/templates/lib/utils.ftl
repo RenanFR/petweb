@@ -61,7 +61,7 @@
     <link href="<@spring.url '/'/>${daterangepicker}" rel="stylesheet" type="text/css" />
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="<@spring.url '/'/>${wysihtml5}" rel="stylesheet" type="text/css" />
-
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -341,24 +341,24 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
+            <li  ${treeQuest?then('class="active treeview"', 'class="treeview"')}>
               <a href="#">
                 <i class="fa fa-tasks"></i> <span><@spring.message "quest"/></span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li ${list?then('class="active"', '')}><a href="<@spring.url '/'/>quest/"><i class="fa fa-circle-o"></i><@spring.message "listQuests"/> </a></li>
                 <li ${form?then('class="active"', '')}><a href="<@spring.url '/'/>quest/form"><i class="fa fa-circle-o"></i> <@spring.message "newQuest"/></a></li>
+                <li ${list?then('class="active"', '')}><a href="<@spring.url '/'/>quest/"><i class="fa fa-circle-o"></i><@spring.message "listQuests"/> </a></li>
               </ul>
             </li>
-            <li class="treeview">
+            <li  ${treeHeroes?then('class="active treeview"', 'class="treeview"')}>
               <a href="#">
                 <i class="fa fa-users"></i>
                 <span><@spring.message "heroes"/></span>
                 <span class="label label-primary pull-right">4</span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<@spring.url '/'/>quest/"><i class="fa fa-circle-o"></i> <@spring.message "newHero"/></a></li>
-                <li><a href="<@spring.url '/'/>quest/"><i class="fa fa-circle-o"></i> <@spring.message "listHeroes"/></a></li>
+                <li ${formHero?then('class="active"', '')}><a href="<@spring.url '/'/>hero/form/"><i class="fa fa-circle-o"></i> <@spring.message "newHero"/></a></li>
+                <li ${listHero?then('class="active"', '')}><a href="<@spring.url '/'/>hero/"><i class="fa fa-circle-o"></i> <@spring.message "listHeroes"/></a></li>
               </ul>
             </li>
             <li>
@@ -366,10 +366,10 @@
                 <i class="fa fa-th"></i> <span>Widgets</span> <small class="label pull-right bg-green">new</small>
               </a>
             </li>
-            <li class="treeview">
+            <li  ${treeClasses?then('class="active treeview"', 'class="treeview"')}>
               <a href="#">
-                <i class="fa fa-pie-chart"></i>
-                <span>Charts</span>
+                <i class="fa fa-lock"></i>
+                <span><@spring.message "classes"/></span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">

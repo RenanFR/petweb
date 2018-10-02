@@ -17,66 +17,66 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.DeleteResult;
-import com.scrum.challenge.codec.HeroCodec;
-import com.scrum.challenge.dao.HeroDAO;
-import com.scrum.challenge.model.Hero;
+import com.scrum.challenge.codec.QuestCodec;
+import com.scrum.challenge.dao.ClassesDAO;
+import com.scrum.challenge.model.Classes;
 
-@Repository("mongoHeroDAO")
-public class MongoHeroDAO implements HeroDAO	{
+@Repository("mongoClassesDAO")
+public class MongoClassesDAO implements ClassesDAO	{
 	
 	private MongoClient mongoClient;
 	
 	private MongoDatabase mongoDatabase;
 	
-	private MongoCollection<Hero> mongoCollection;
+	private MongoCollection<Classes> mongoCollection;
 
 	private void connect() {
 		Codec<Document> codec = MongoClient.getDefaultCodecRegistry().get(Document.class);
-		HeroCodec heroCodec = new HeroCodec(codec);
-		CodecRegistry codecRegistry = CodecRegistries.fromRegistries(MongoClient.getDefaultCodecRegistry(), CodecRegistries.fromCodecs(heroCodec));
+		QuestCodec questCodec = new QuestCodec(codec);
+		CodecRegistry codecRegistry = CodecRegistries.fromRegistries(MongoClient.getDefaultCodecRegistry(), CodecRegistries.fromCodecs(questCodec));
 		MongoClientOptions options = MongoClientOptions.builder().codecRegistry(codecRegistry).build();
 		mongoClient = new MongoClient("localhost:27017", options);
 		mongoDatabase = mongoClient.getDatabase("test");
-		mongoCollection = mongoDatabase.getCollection("heroes", Hero.class);
+		mongoCollection = mongoDatabase.getCollection("classes", Classes.class);
 	}
 	
-	public Hero save(Hero hero) {
+	public Classes save(Classes classes) {
 		connect();
-		if (hero.getObjectId() == null) {
-			hero.generateId();
-			mongoCollection.insertOne(hero);
+		if (classes.getObjectId() == null) {
+			classes.generateId();
+			mongoCollection.insertOne(classes);
 		} else {
-			mongoCollection.updateOne(Filters.eq("_id", hero.getObjectId()), new Document("$set", hero));
+			mongoCollection.updateOne(Filters.eq("_id", classes.getObjectId()), new Document("$set", classes));
 		}
 		mongoClient.close();
-		return hero;
+		return classes;
 	}
 
 
 	@Override
-	public List<Hero> findAll() {
+	public List<Classes> findAll() {
 		connect();
-		MongoCursor<Hero> iterator = mongoCollection.find().iterator();
-		List<Hero> heroes = new ArrayList<Hero>();
+		MongoCursor<Classes> iterator = mongoCollection.find().iterator();
+		List<Classes> classes = new ArrayList<Classes>();
 		while (iterator.hasNext()) {
-			Hero nextHero = iterator.next();
-			heroes.add(nextHero);
+			Classes nextClasses = iterator.next();
+			classes.add(nextClasses);
 		}
-		return heroes;
+		return classes;
 	}
 	
 	@Override
-	public Hero findById(ObjectId id) {
+	public Classes findById(ObjectId id) {
 		connect();
-		Hero hero = mongoCollection.find(Filters.eq("_id", id)).first();
+		Classes classes = mongoCollection.find(Filters.eq("_id", id)).first();
 		mongoClient.close();
-		return hero;
+		return classes;		
 	}
 	
 	@Override
-	public void delete(Hero hero) {
+	public void delete(Classes classes) {
 		connect();
-		ObjectId _id = hero.getObjectId();
+		ObjectId _id = classes.getObjectId();
 		DeleteResult delete = mongoCollection.deleteOne(Filters.eq("_id", _id));
 		if (delete.getDeletedCount() == 0) {
 			throw new RuntimeException("NÃO FOI POSSÍVEL ELIMINAR NENHUM DOCUMENTO COM O ID " + _id);
