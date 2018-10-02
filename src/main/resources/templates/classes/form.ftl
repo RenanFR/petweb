@@ -5,6 +5,8 @@
 <#assign list = false in u>
 <#assign listHero = false in u>
 <#assign formHero = true in u>
+<#assign formProfile = false in u>
+<#assign listProfile = false in u>
 <#assign treeQuest = false in u>
 <#assign treeHeroes = false in u>
 <#assign treeClasses = true in u>
@@ -13,10 +15,10 @@
 	<div class="row">
 		<div class="box box-primary">
 	        <div class="box-header with-border">
-	          <h3 class="box-title"><@spring.message "newQuest"/></h3>
+	          <h3 class="box-title"><@spring.message "newProfile"/></h3>
 	        </div>		
 	        <!-- form start -->
-	        <form action="/scrum-challenge/hero" method="POST" role="form">
+	        <form action="/scrum-challenge/classes" method="POST" role="form">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	        
 	        <@spring.bind "classes" />
             <@spring.formHiddenInput "classes.objectId"/>

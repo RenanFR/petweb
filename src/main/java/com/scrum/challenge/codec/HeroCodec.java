@@ -55,7 +55,9 @@ public class HeroCodec implements CollectibleCodec<Hero>	{
 		ObjectId objectId = document.getObjectId("_id");
 		Hero hero = new Hero();
 		hero.setName(name);
-		hero.setXp(new BigDecimal(xp));
+		if (xp != null) {
+			hero.setXp(new BigDecimal(xp));
+		}
 		hero.setObjectId(objectId);
 		hero.setPassword(password);
 		return hero;

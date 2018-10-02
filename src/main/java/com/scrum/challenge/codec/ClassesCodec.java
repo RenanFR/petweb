@@ -9,6 +9,7 @@ import org.bson.codecs.Codec;
 import org.bson.codecs.CollectibleCodec;
 import org.bson.codecs.DecoderContext;
 import org.bson.codecs.EncoderContext;
+import org.bson.types.ObjectId;
 
 import com.scrum.challenge.model.Classes;
 
@@ -24,6 +25,8 @@ public class ClassesCodec implements CollectibleCodec<Classes> {
 	public void encode(BsonWriter writer, Classes classValue, EncoderContext encoderContext) {
 		Document classDocument = new Document();
 		String description = classValue.getDescription();
+		ObjectId objectId = classValue.getObjectId();
+		classDocument.append("_id", objectId);
 		classDocument.append("description", description);
 		codec.encode(writer, classDocument, encoderContext);
 	}
@@ -37,7 +40,7 @@ public class ClassesCodec implements CollectibleCodec<Classes> {
 	public Classes decode(BsonReader reader, DecoderContext decoderContext) {
 		Document document = codec.decode(reader, decoderContext);
 		Classes classes = null;
-		classes = new Classes(document.getString("description"));
+		classes = new Classes(document.getObjectId("_id"), document.getString("description"));
 		return classes;
 	}
 

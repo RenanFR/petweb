@@ -5,10 +5,12 @@
 <#assign list = false in u>
 <#assign listHero = true in u>
 <#assign formHero = false in u>
+<#assign formProfile = false in u>
+<#assign listProfile = false in u>
 <#assign treeQuest = false in u>
 <#assign treeHeroes = false in u>
 <#assign treeClasses = true in u>
-<#assign context = "http://localhost:9010/scrum-challenge/hero">
+<#assign context = "http://localhost:9010/scrum-challenge/classes">
 
 <@u.page>
       <div class="row">
@@ -22,6 +24,7 @@
 			<table id="questList" class="table table-bordered table-hover">
                 <thead>
                 <tr>
+                	<th><@spring.message "actions"/></th>
                   <th><@spring.message "description"/></th>                
                 </tr>
                 </thead>

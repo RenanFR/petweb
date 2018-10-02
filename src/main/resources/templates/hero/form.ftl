@@ -5,6 +5,8 @@
 <#assign list = false in u>
 <#assign listHero = false in u>
 <#assign formHero = true in u>
+<#assign formProfile = false in u>
+<#assign listProfile = false in u>
 <#assign treeQuest = false in u>
 <#assign treeHeroes = true in u>
 <#assign treeClasses = false in u>

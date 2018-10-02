@@ -17,7 +17,7 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.DeleteResult;
-import com.scrum.challenge.codec.QuestCodec;
+import com.scrum.challenge.codec.ClassesCodec;
 import com.scrum.challenge.dao.ClassesDAO;
 import com.scrum.challenge.model.Classes;
 
@@ -32,8 +32,8 @@ public class MongoClassesDAO implements ClassesDAO	{
 
 	private void connect() {
 		Codec<Document> codec = MongoClient.getDefaultCodecRegistry().get(Document.class);
-		QuestCodec questCodec = new QuestCodec(codec);
-		CodecRegistry codecRegistry = CodecRegistries.fromRegistries(MongoClient.getDefaultCodecRegistry(), CodecRegistries.fromCodecs(questCodec));
+		ClassesCodec classesCodec = new ClassesCodec(codec);
+		CodecRegistry codecRegistry = CodecRegistries.fromRegistries(MongoClient.getDefaultCodecRegistry(), CodecRegistries.fromCodecs(classesCodec));
 		MongoClientOptions options = MongoClientOptions.builder().codecRegistry(codecRegistry).build();
 		mongoClient = new MongoClient("localhost:27017", options);
 		mongoDatabase = mongoClient.getDatabase("test");

@@ -5,6 +5,8 @@
 <#assign list = false in u>
 <#assign listHero = true in u>
 <#assign formHero = false in u>
+<#assign formProfile = false in u>
+<#assign listProfile = false in u>
 <#assign treeQuest = false in u>
 <#assign treeHeroes = true in u>
 <#assign treeClasses = false in u>
@@ -22,10 +24,10 @@
 			<table id="questList" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th><@spring.message "id"/></th>                
-                  <th><@spring.message "name"/></th>
-                  <th><@spring.message "xp"/></th>
-                  <th><@spring.message "password"/></th>
+					<th><@spring.message "actions"/></th>
+					<th><@spring.message "name"/></th>
+					<th><@spring.message "xp"/></th>
+					<th><@spring.message "password"/></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -38,10 +40,9 @@
 							    <i class="fa fa-ellipsis-h"></i>
 						    </a>
 					    </td>
-					    <td>${h.id}</td>
 					    <td>${h.name}</td>
-					    <td>${h.xp}</td>
-					    <td>${h.password}</td>
+					    <td>${h.xp!}</td>
+					    <td>${h.password!}</td>
 					</tr>
 					</#list>                
 				</tbody>
