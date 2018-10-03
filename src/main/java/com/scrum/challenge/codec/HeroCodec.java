@@ -1,7 +1,9 @@
 package com.scrum.challenge.codec;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.bson.BsonReader;
 import org.bson.BsonString;
@@ -16,6 +18,7 @@ import org.bson.types.ObjectId;
 import org.springframework.security.core.GrantedAuthority;
 
 import com.scrum.challenge.model.Hero;
+import com.scrum.challenge.model.Skills;
 
 public class HeroCodec implements CollectibleCodec<Hero>	{
 	
@@ -34,10 +37,18 @@ public class HeroCodec implements CollectibleCodec<Hero>	{
 		heroDocument.append("name", name);
 		String password = hero.getPassword();
 		heroDocument.append("password", password);
-		BigDecimal xp = hero.getXp();
-		heroDocument.append("xp", xp);
+		BigDecimal xp = hero.getXp() != null? hero.getXp() : BigDecimal.valueOf(0);
+		heroDocument.append("xp", xp.toString());
 		Collection<? extends GrantedAuthority> authorities = hero.getAuthorities();
 		heroDocument.append("classes", authorities);
+		List<Skills> skills = hero.getSkills();
+		if (skills != null) {
+			List<Document> documentSkill = new ArrayList<>();
+			for (Skills skill : skills) {
+				documentSkill.add(new Document("title", skill.getDescription()));
+			}
+			heroDocument.append("skills", documentSkill);
+		}
 		codec.encode(writer, heroDocument, encoderContext);
 	}
 
@@ -51,7 +62,7 @@ public class HeroCodec implements CollectibleCodec<Hero>	{
 		Document document = codec.decode(reader, decoderContext);
 		String name = document.getString("name");
 		String password = document.getString("password");
-		Double xp = document.getDouble("xp");
+		Double xp = Double.valueOf(document.getString("xp"));
 		ObjectId objectId = document.getObjectId("_id");
 		Hero hero = new Hero();
 		hero.setName(name);

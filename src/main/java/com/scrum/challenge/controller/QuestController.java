@@ -66,6 +66,5 @@ public class QuestController {
 		ModelAndView modelAndView = new ModelAndView("quest/details");
 		modelAndView.addObject("quest", questService.findById(id));
 		return modelAndView;
-		
 	}
 }

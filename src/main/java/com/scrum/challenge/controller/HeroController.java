@@ -1,5 +1,9 @@
 package com.scrum.challenge.controller;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.bson.types.ObjectId;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.scrum.challenge.model.Hero;
+import com.scrum.challenge.model.Skills;
 import com.scrum.challenge.service.HeroService;
 
 @Controller
@@ -26,6 +31,11 @@ public class HeroController {
 	@GetMapping("form")
 	public ModelAndView form() {
 		ModelAndView modelAndView = new ModelAndView("hero/form");
+		Map<String, String> skills = new HashMap<>();
+		for (Skills sk : Arrays.asList(Skills.values())) {
+			skills.put(sk.name(), sk.getDescription());
+		}
+		modelAndView.addObject("skills", skills);
 		modelAndView.addObject("hero", new Hero());
 		return modelAndView;
 	}
@@ -59,6 +69,13 @@ public class HeroController {
 		ModelAndView modelAndView = new ModelAndView("hero/form");
 		modelAndView.addObject("hero", heroService.findById(id));
 		return modelAndView;
-	}				
+	}
+	
+	@GetMapping(value = "{id}")
+	public ModelAndView detailsQuest(@PathVariable("id")ObjectId id) {
+		ModelAndView modelAndView = new ModelAndView("hero/details");
+		modelAndView.addObject("hero", heroService.findById(id));
+		return modelAndView;
+	}	
 
 }

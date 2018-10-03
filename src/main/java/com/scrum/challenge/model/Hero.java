@@ -4,7 +4,10 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,8 +37,12 @@ public class Hero implements UserDetails	{
 	
 	private String password;
 	
+	@ElementCollection(targetClass = Skills.class)
+	@Enumerated(EnumType.STRING)
+	private List<Skills> skills;
+	
 	@ManyToMany(fetch = FetchType.LAZY)
-	private List<Classes> classes; 
+	private List<Classes> classes;
 	
 	public Hero() {
 	}
@@ -76,6 +83,22 @@ public class Hero implements UserDetails	{
 		this.xp = xp;
 	}
 	
+	public List<Skills> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<Skills> skills) {
+		this.skills = skills;
+	}
+
+	public List<Classes> getClasses() {
+		return classes;
+	}
+
+	public void setClasses(List<Classes> classes) {
+		this.classes = classes;
+	}
+
 	public Hero generateId() {
 		setObjectId(new ObjectId());
 		return this;

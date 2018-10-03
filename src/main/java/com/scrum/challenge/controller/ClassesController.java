@@ -56,7 +56,7 @@ public class ClassesController {
 	
 	@GetMapping(value = "edit/{id}")
 	public ModelAndView editClass(@PathVariable("id")ObjectId id) {
-		ModelAndView modelAndView = new ModelAndView("hero/form");
+		ModelAndView modelAndView = new ModelAndView("classes/form");
 		modelAndView.addObject("classes", classesService.findById(id));
 		return modelAndView;
 	}	

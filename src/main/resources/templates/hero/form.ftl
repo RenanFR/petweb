@@ -31,12 +31,17 @@
 			
             <div class="form-group">
               <label for="description"><@spring.message "xp"/></label>
-              <@spring.formInput "hero.xp" "class=form-control" "text"/>
+              <@spring.formInput "hero.xp" "class=form-control" "number"/>
             </div>
             
             <div class="form-group">
               <label for="beginDate"><@spring.message "password"/></label>
               <@spring.formInput "hero.password" "class=form-control" "password"/>
+            </div>
+            
+            <div class="form-group">
+            	<label for="skills"><@spring.message "skills"/></label>
+            	<@spring.formMultiSelect "hero.skills", skills/>
             </div>
             
 		</div>
