@@ -3,23 +3,15 @@
 
 <#assign form = true in u>
 <#assign list = false in u>
-<#assign listHero = false in u>
-<#assign formHero = false in u>
-<#assign formProfile = false in u>
-<#assign listProfile = false in u>
-<#assign treeQuest = true in u>
-<#assign treeHeroes = false in u>
-<#assign treeClasses = false in u>
 
 <@u.page>
 	<div class="row">
 		<div class="box box-primary">
 	        <div class="box-header with-border">
 	          <h3 class="box-title"><@spring.message "newQuest"/></h3>
-	        </div>
+	        </div>		
 	        <!-- form start -->
 	        <form action="/scrum-challenge/quest" method="POST" role="form">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
             <@spring.bind "quest" />
             <@spring.formHiddenInput "quest.objectId"/>
 			<div class="box-body">

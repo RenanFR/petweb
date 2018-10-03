@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +30,7 @@ public class QuestController {
 	}
 	
 	@PostMapping
-	public ModelAndView save(@ModelAttribute("quest") Quest quest, BindingResult result) {
+	public ModelAndView save(@ModelAttribute("quest") Quest quest) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/quest/");
 		questService.save(quest);
 		return modelAndView;
@@ -66,5 +65,6 @@ public class QuestController {
 		ModelAndView modelAndView = new ModelAndView("quest/details");
 		modelAndView.addObject("quest", questService.findById(id));
 		return modelAndView;
+		
 	}
 }

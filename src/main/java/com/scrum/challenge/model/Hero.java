@@ -1,30 +1,19 @@
 package com.scrum.challenge.model;
 
 import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.List;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.bson.types.ObjectId;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "tbl_hero")
-public class Hero implements UserDetails	{
+public class Hero {
 	
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Long id;
@@ -34,20 +23,9 @@ public class Hero implements UserDetails	{
 	private String name;
 	
 	private BigDecimal xp;
-	
-	private String password;
-	
-	@ElementCollection(targetClass = Skills.class)
-	@Enumerated(EnumType.STRING)
-	private List<Skills> skills;
-	
-	@ManyToMany(fetch = FetchType.LAZY)
-	private List<Classes> classes;
-	
-	public Hero() {
-	}
 
 	public Hero(String name) {
+		super();
 		this.name = name;
 	}
 
@@ -82,67 +60,7 @@ public class Hero implements UserDetails	{
 	public void setXp(BigDecimal xp) {
 		this.xp = xp;
 	}
-	
-	public List<Skills> getSkills() {
-		return skills;
-	}
 
-	public void setSkills(List<Skills> skills) {
-		this.skills = skills;
-	}
-
-	public List<Classes> getClasses() {
-		return classes;
-	}
-
-	public void setClasses(List<Classes> classes) {
-		this.classes = classes;
-	}
-
-	public Hero generateId() {
-		setObjectId(new ObjectId());
-		return this;
-	}	
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return classes;
-	}
-
-	@Override
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	@Override
-	public String getUsername() {
-		return name;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
-	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -175,6 +93,6 @@ public class Hero implements UserDetails	{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
 
 }
