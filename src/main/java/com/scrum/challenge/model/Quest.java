@@ -45,7 +45,6 @@ public class Quest implements Serializable	{
 
 	public Quest(ObjectId objectId, String title, String description, LocalDateTime beginDate,
 			LocalDateTime expectedEndDate, LocalDateTime endDate, Sprint sprint, Hero assignedHero) {
-		super();
 		this.objectId = objectId;
 		this.title = title;
 		this.description = description;
@@ -54,6 +53,16 @@ public class Quest implements Serializable	{
 		this.endDate = endDate;
 		this.sprint = sprint;
 		this.assignedHero = assignedHero;
+	}
+	
+	public Quest(ObjectId objectId, String title, String description, LocalDateTime beginDate,
+			LocalDateTime expectedEndDate, LocalDateTime endDate) {
+		this.objectId = objectId;
+		this.title = title;
+		this.description = description;
+		this.beginDate = beginDate;
+		this.expectedEndDate = expectedEndDate;
+		this.endDate = endDate;
 	}
 
 	public Long getId() {

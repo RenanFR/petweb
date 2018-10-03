@@ -3,6 +3,13 @@
 
 <#assign form = false in u>
 <#assign list = true in u>
+<#assign listHero = false in u>
+<#assign formHero = false in u>
+<#assign formProfile = false in u>
+<#assign listProfile = false in u>
+<#assign treeQuest = true in u>
+<#assign treeHeroes = false in u>
+<#assign treeClasses = false in u>
 <#assign context = "http://localhost:9010/scrum-challenge/quest">
 
 <@u.page>
