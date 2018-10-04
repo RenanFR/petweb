@@ -8,6 +8,7 @@ import org.bson.codecs.Codec;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.types.ObjectId;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.mongodb.MongoClient;
@@ -82,6 +83,13 @@ public class MongoHeroDAO implements HeroDAO	{
 			throw new RuntimeException("NÃO FOI POSSÍVEL ELIMINAR NENHUM DOCUMENTO COM O ID " + _id);
 		}
 		mongoClient.close();
+	}
+
+	@Override
+	public UserDetails findByName(String username) {
+		connect();
+		Hero hero = mongoCollection.find(Filters.eq("name", username)).first();
+		return hero;
 	}	
 	
 }

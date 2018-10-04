@@ -2,6 +2,7 @@ package com.scrum.challenge.controller;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.scrum.challenge.model.Classes;
 import com.scrum.challenge.model.Hero;
 import com.scrum.challenge.model.Skills;
+import com.scrum.challenge.service.ClassesService;
 import com.scrum.challenge.service.HeroService;
 
 @Controller
@@ -27,6 +30,9 @@ public class HeroController {
 	
 	@Autowired
 	private HeroService heroService;
+	
+	@Autowired
+	private ClassesService classesService;
 	
 	@GetMapping("form")
 	public ModelAndView form() {
@@ -42,6 +48,8 @@ public class HeroController {
 			skills.put(sk.name(), sk.getDescription());
 		}
 		modelAndView.addObject("skills", skills);
+		List<Classes> classes = classesService.findAll();
+		modelAndView.addObject("classes", classes);
 	}
 	
 	@GetMapping

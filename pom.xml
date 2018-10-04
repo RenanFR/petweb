@@ -52,7 +52,12 @@
 	    <dependency>
 	        <groupId>org.mongodb</groupId>
 	        <artifactId>mongodb-driver</artifactId>
-	    </dependency>        
+	    </dependency>
+	    
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		</dependency>
     
   </dependencies>
   

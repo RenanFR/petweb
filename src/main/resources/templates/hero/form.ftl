@@ -44,6 +44,11 @@
             	<@spring.formMultiSelect "hero.skills", skills/>
             </div>
             
+            <div class="form-group">
+            	<label for="skills"><@spring.message "classes"/></label>
+            	<@spring.formMultiSelect "hero.classes", classes/>
+            </div>
+            
 		</div>
             
 		  <div class="box-footer">
