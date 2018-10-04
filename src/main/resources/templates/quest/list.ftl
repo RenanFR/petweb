@@ -30,6 +30,7 @@
                   <th><@spring.message "beginDate"/></th>
                   <th><@spring.message "expectedEndDate"/></th>
                   <th><@spring.message "endDate"/></th>
+                  <th><@spring.message "assignedHero"/></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,6 +48,7 @@
 					    <td>${q.beginDate}</td>
 					    <td>${q.expectedEndDate}</td>
 					    <td>${q.endDate}</td>
+					    <td>${q.assignedHero!}</td>
 					</tr>
 					</#list>                
 				</tbody>

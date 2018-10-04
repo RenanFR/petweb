@@ -67,8 +67,11 @@ public class QuestCodec implements CollectibleCodec<Quest> {
 		if (document.getString("idSprint") != null) {
 			sprint = new Sprint(new ObjectId(document.getString("idSprint")));
 		}
-		if (document.getString("nameHero") != null) {
-			assignedHero = new Hero(document.getString("nameHero"));
+		Document documentHero = document.get("assignedHero", Document.class);
+		ObjectId objectId = documentHero.getObjectId("objectId");
+		String nameHero = documentHero.getString("name");
+		if (objectId != null) {
+			assignedHero = new Hero(objectId, nameHero);
 		}
 		Quest quest = new Quest(document.getObjectId("_id"), 
 				document.getString("title"), 

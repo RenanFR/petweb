@@ -69,6 +69,11 @@ public class HeroCodec implements CollectibleCodec<Hero>	{
 		if (xp != null) {
 			hero.setXp(new BigDecimal(xp));
 		}
+		@SuppressWarnings("unchecked")
+		List<Skills> skills = (List<Skills>)document.get("skills", List.class);
+		if (skills != null) {
+			hero.setSkills(skills);
+		}
 		hero.setObjectId(objectId);
 		hero.setPassword(password);
 		return hero;

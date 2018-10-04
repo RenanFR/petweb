@@ -51,6 +51,15 @@ public class Hero implements UserDetails	{
 		this.name = name;
 	}
 
+	public Hero(ObjectId objectId) {
+		this.objectId = objectId;
+	}
+
+	public Hero(ObjectId objectId, String name) {
+		this.objectId = objectId;
+		this.name = name;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -146,9 +155,7 @@ public class Hero implements UserDetails	{
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Hero [name=");
 		builder.append(name);
-		builder.append("]");
 		return builder.toString();
 	}
 

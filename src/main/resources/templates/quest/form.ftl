@@ -21,7 +21,6 @@
 	        <form action="/scrum-challenge/quest" method="POST" role="form">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
             <@spring.bind "quest" />
-            <@spring.bind "listHeroes" />
             <@spring.formHiddenInput "quest.objectId"/>
 			<div class="box-body">
 			

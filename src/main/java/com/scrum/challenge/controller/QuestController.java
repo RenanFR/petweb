@@ -1,6 +1,8 @@
 package com.scrum.challenge.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,14 +35,22 @@ public class QuestController {
 	@GetMapping("form")
 	public ModelAndView form() {
 		ModelAndView modelAndView = new ModelAndView("quest/form");
-		List<Hero> listHeroes = heroService.findAll();
-		modelAndView.addObject("listHeroes", listHeroes);
+		addHeroesList(modelAndView);
 		modelAndView.addObject("quest", new Quest());
 		return modelAndView;
 	}
+
+	private void addHeroesList(ModelAndView modelAndView) {
+		List<Hero> listHeroes = heroService.findAll();
+		Map<String, Hero> mapHeroes = new HashMap<>();
+		listHeroes
+			.forEach(h -> mapHeroes.put(h.getObjectId().toString(), h));
+		modelAndView.addObject("listHeroes", mapHeroes);
+	}
 	
 	@PostMapping
-	public ModelAndView save(@ModelAttribute("quest") Quest quest, BindingResult result) {
+	public ModelAndView save(@ModelAttribute("quest") Quest quest,
+			BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/quest/");
 		questService.save(quest);
 		return modelAndView;
@@ -66,6 +76,7 @@ public class QuestController {
 	@GetMapping(value = "edit/{id}")
 	public ModelAndView editQuest(@PathVariable("id")ObjectId id) {
 		ModelAndView modelAndView = new ModelAndView("quest/form");
+		addHeroesList(modelAndView);
 		modelAndView.addObject("quest", questService.findById(id));
 		return modelAndView;
 	}
