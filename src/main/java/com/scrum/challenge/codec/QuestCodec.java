@@ -33,9 +33,12 @@ public class QuestCodec implements CollectibleCodec<Quest> {
 		LocalDateTime beginDate = quest.getBeginDate();
 		LocalDateTime expectedEndDate = quest.getExpectedEndDate();
 		LocalDateTime endDate = quest.getEndDate();
-		if (quest.getAssignedHero() != null) {
-			String nameHero = quest.getAssignedHero().getName();
-			questDocument.append("nameHero", nameHero);
+		Hero assignedHero = quest.getAssignedHero();
+		if (assignedHero != null) {
+			String nameHero = assignedHero.getName();
+			ObjectId heroObjectId = assignedHero.getObjectId();
+			Document heroDocument = new Document("name", nameHero).append("objectId", heroObjectId);
+			questDocument.append("assignedHero", heroDocument);
 		}
 		ObjectId objectId = quest.getObjectId();
 		if (quest.getSprint() != null) {

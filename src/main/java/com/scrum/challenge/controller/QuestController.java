@@ -1,5 +1,7 @@
 package com.scrum.challenge.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.bson.types.ObjectId;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.scrum.challenge.model.Hero;
 import com.scrum.challenge.model.Quest;
+import com.scrum.challenge.service.HeroService;
 import com.scrum.challenge.service.QuestService;
 
 @Controller
@@ -22,10 +26,15 @@ public class QuestController {
 	
 	@Autowired
 	private QuestService questService;
+	
+	@Autowired
+	private HeroService heroService;
 
 	@GetMapping("form")
 	public ModelAndView form() {
 		ModelAndView modelAndView = new ModelAndView("quest/form");
+		List<Hero> listHeroes = heroService.findAll();
+		modelAndView.addObject("listHeroes", listHeroes);
 		modelAndView.addObject("quest", new Quest());
 		return modelAndView;
 	}

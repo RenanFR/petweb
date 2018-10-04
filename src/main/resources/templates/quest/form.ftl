@@ -21,6 +21,7 @@
 	        <form action="/scrum-challenge/quest" method="POST" role="form">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
             <@spring.bind "quest" />
+            <@spring.bind "listHeroes" />
             <@spring.formHiddenInput "quest.objectId"/>
 			<div class="box-body">
 			
@@ -47,6 +48,11 @@
             <div class="form-group">
               <label for="endDate"><@spring.message "endDate"/></label>
               <@spring.formInput "quest.endDate" "class=form-control" "datetime-local"/>
+            </div>
+            
+            <div class="form-group">
+              	<label for="hero"><@spring.message "hero"/></label>
+            	<@spring.formSingleSelect "quest.assignedHero", listHeroes/>
             </div>
             
 		</div>
