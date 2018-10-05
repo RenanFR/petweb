@@ -1,8 +1,8 @@
 package com.scrum.challenge.service;
 
+
 import java.util.List;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class HeroService implements UserDetailsService {
 	private HeroDAO heroDAO;
 	
 	public void save(Hero hero) {
-		String password = DigestUtils.getMd5Digest().digest(Base64.encodeBase64(hero.getPassword().getBytes())).toString();
+		String password = DigestUtils.md5Hex(hero.getPassword());
 		hero.setPassword(password);
 		heroDAO.save(hero);
 	}
@@ -42,7 +42,11 @@ public class HeroService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return heroDAO.findByName(username);
+		UserDetails hero = heroDAO.findByName(username);
+		if (hero == null) {
+			throw new UsernameNotFoundException(username + " NÃO FOI ENCONTRADO NA BASE DE DADOS.");
+		}
+		return hero;
 	}
 	
 }

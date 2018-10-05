@@ -32,10 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
-		passwordEncoder.setEncodeHashAsBase64(true);
 		auth
-		.userDetailsService(userDetailsService)
-		.passwordEncoder(passwordEncoder);
+			.userDetailsService(userDetailsService)
+			.passwordEncoder(passwordEncoder);
 		auth.inMemoryAuthentication().withUser("username").password("password").roles("USER");
 	}
 

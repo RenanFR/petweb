@@ -48,8 +48,10 @@ public class HeroController {
 			skills.put(sk.name(), sk.getDescription());
 		}
 		modelAndView.addObject("skills", skills);
+		Map<String, String> mapClasses = new HashMap<>();
 		List<Classes> classes = classesService.findAll();
-		modelAndView.addObject("classes", classes);
+		classes.forEach(c -> mapClasses.put(c.getObjectId().toHexString(), c.getDescription()));
+		modelAndView.addObject("classes", mapClasses);
 	}
 	
 	@GetMapping
