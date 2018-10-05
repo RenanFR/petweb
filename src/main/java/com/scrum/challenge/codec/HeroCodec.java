@@ -2,7 +2,6 @@ package com.scrum.challenge.codec;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.bson.BsonReader;
@@ -15,8 +14,8 @@ import org.bson.codecs.CollectibleCodec;
 import org.bson.codecs.DecoderContext;
 import org.bson.codecs.EncoderContext;
 import org.bson.types.ObjectId;
-import org.springframework.security.core.GrantedAuthority;
 
+import com.scrum.challenge.model.Classes;
 import com.scrum.challenge.model.Hero;
 import com.scrum.challenge.model.Skills;
 
@@ -39,8 +38,14 @@ public class HeroCodec implements CollectibleCodec<Hero>	{
 		heroDocument.append("password", password);
 		BigDecimal xp = hero.getXp() != null? hero.getXp() : BigDecimal.valueOf(0);
 		heroDocument.append("xp", xp.toString());
-		Collection<? extends GrantedAuthority> authorities = hero.getAuthorities();
-		heroDocument.append("classes", authorities);
+		List<Classes> classes = hero.getClasses();
+		if (classes != null) {
+			List<Document> classesDocument = new ArrayList<>();
+			for (Classes c : classes)  {
+				classesDocument.add(new Document("description", c.getDescription()));
+			}
+			heroDocument.append("classes", classesDocument);
+		}
 		List<Skills> skills = hero.getSkills();
 		if (skills != null) {
 			List<Document> documentSkill = new ArrayList<>();
@@ -58,6 +63,7 @@ public class HeroCodec implements CollectibleCodec<Hero>	{
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public Hero decode(BsonReader reader, DecoderContext decoderContext) {
 		Document document = codec.decode(reader, decoderContext);
 		String name = document.getString("name");
@@ -69,11 +75,12 @@ public class HeroCodec implements CollectibleCodec<Hero>	{
 		if (xp != null) {
 			hero.setXp(new BigDecimal(xp));
 		}
-		@SuppressWarnings("unchecked")
 		List<Skills> skills = (List<Skills>)document.get("skills", List.class);
 		if (skills != null) {
 			hero.setSkills(skills);
 		}
+		List<Classes> classes = (List<Classes>)document.get("classes", List.class);
+		hero.setClasses(classes);
 		hero.setObjectId(objectId);
 		hero.setPassword(password);
 		return hero;

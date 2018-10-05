@@ -19,6 +19,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.DeleteResult;
 import com.scrum.challenge.codec.HeroCodec;
+import com.scrum.challenge.codec.SkillsCodec;
 import com.scrum.challenge.dao.HeroDAO;
 import com.scrum.challenge.model.Hero;
 
@@ -34,7 +35,8 @@ public class MongoHeroDAO implements HeroDAO	{
 	private void connect() {
 		Codec<Document> codec = MongoClient.getDefaultCodecRegistry().get(Document.class);
 		HeroCodec heroCodec = new HeroCodec(codec);
-		CodecRegistry codecRegistry = CodecRegistries.fromRegistries(MongoClient.getDefaultCodecRegistry(), CodecRegistries.fromCodecs(heroCodec));
+		SkillsCodec skillsCodec = new SkillsCodec(codec);
+		CodecRegistry codecRegistry = CodecRegistries.fromRegistries(MongoClient.getDefaultCodecRegistry(), CodecRegistries.fromCodecs(heroCodec, skillsCodec));
 		MongoClientOptions options = MongoClientOptions.builder().codecRegistry(codecRegistry).build();
 		mongoClient = new MongoClient("localhost:27017", options);
 		mongoDatabase = mongoClient.getDatabase("test");

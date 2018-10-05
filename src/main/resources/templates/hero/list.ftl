@@ -28,6 +28,7 @@
 					<th><@spring.message "name"/></th>
 					<th><@spring.message "xp"/></th>
 					<th><@spring.message "password"/></th>
+					<th><@spring.message "classes"/></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,6 +44,13 @@
 					    <td>${h.name}</td>
 					    <td>${h.xp!}</td>
 					    <td>${h.password!}</td>
+					    <td>
+					    	<ul>
+							<#list h.classes as c>
+								<li>${c.description}</li>
+							</#list>
+							</ul>
+					    </td>
 					</tr>
 					</#list>                
 				</tbody>

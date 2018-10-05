@@ -39,16 +39,6 @@
               <@spring.formInput "hero.password" "class=form-control" "password"/>
             </div>
             
-            <div class="form-group">
-            	<label for="skills"><@spring.message "skills"/></label>
-            	<@spring.formMultiSelect "hero.skills", skills/>
-            </div>
-            
-            <div class="form-group">
-            	<label for="classes"><@spring.message "classes"/></label>
-            	<@spring.formMultiSelect "hero.classes", classes/>
-            </div>
-            
 		</div>
             
 		  <div class="box-footer">

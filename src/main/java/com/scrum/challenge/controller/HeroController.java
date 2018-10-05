@@ -80,7 +80,7 @@ public class HeroController {
 	
 	@GetMapping(value = "edit/{id}")
 	public ModelAndView editHero(@PathVariable("id")ObjectId id) {
-		ModelAndView modelAndView = new ModelAndView("hero/form");
+		ModelAndView modelAndView = new ModelAndView("hero/edit");
 		addSkillList(modelAndView);
 		modelAndView.addObject("hero", heroService.findById(id));
 		return modelAndView;

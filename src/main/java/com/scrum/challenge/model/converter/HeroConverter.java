@@ -1,10 +1,11 @@
-package com.scrum.challenge.model;
+package com.scrum.challenge.model.converter;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import com.scrum.challenge.model.Hero;
 import com.scrum.challenge.service.HeroService;
 
 @Component
