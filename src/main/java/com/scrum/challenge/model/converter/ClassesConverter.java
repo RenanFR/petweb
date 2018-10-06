@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.scrum.challenge.model.Classes;
 import com.scrum.challenge.service.ClassesService;
 
-@Component
+//@Component
 public class ClassesConverter implements Converter<String, Classes>{
 	
 	@Autowired

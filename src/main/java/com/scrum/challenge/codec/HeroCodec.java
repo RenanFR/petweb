@@ -38,19 +38,19 @@ public class HeroCodec implements CollectibleCodec<Hero>	{
 		heroDocument.append("password", password);
 		BigDecimal xp = hero.getXp() != null? hero.getXp() : BigDecimal.valueOf(0);
 		heroDocument.append("xp", xp.toString());
-		List<Classes> classes = hero.getClasses();
+		List<Classes> classes = hero.classesToList();
 		if (classes != null) {
 			List<Document> classesDocument = new ArrayList<>();
 			for (Classes c : classes)  {
-				classesDocument.add(new Document("description", c.getDescription()));
+				classesDocument.add(new Document("description", c.getDescription()).append("_id", c.getObjectId()));
 			}
 			heroDocument.append("classes", classesDocument);
 		}
-		List<Skills> skills = hero.getSkills();
+		List<Skills> skills = hero.skillsToList();
 		if (skills != null) {
 			List<Document> documentSkill = new ArrayList<>();
 			for (Skills skill : skills) {
-				documentSkill.add(new Document("title", skill.getDescription()));
+				documentSkill.add(new Document("title", skill.getDescription()).append("name", skill.name()));
 			}
 			heroDocument.append("skills", documentSkill);
 		}
@@ -75,11 +75,21 @@ public class HeroCodec implements CollectibleCodec<Hero>	{
 		if (xp != null) {
 			hero.setXp(new BigDecimal(xp));
 		}
-		List<Skills> skills = (List<Skills>)document.get("skills", List.class);
-		if (skills != null) {
-			hero.setSkills(skills);
+		List<Skills> skills = new ArrayList<>(); 
+		List<Document> documentsSkills = (List<Document>)document.get("skills");
+		if (documentsSkills != null) {
+			for (Document docSkills : documentsSkills) {
+				skills.add(Skills.valueOf(docSkills.getString("name")));
+			}
 		}
-		List<Classes> classes = (List<Classes>)document.get("classes", List.class);
+		hero.setSkills(skills);
+		List<Classes> classes = new ArrayList<>();
+		List<Document> documentsClasses = (List<Document>)document.get("classes");
+		if (documentsClasses != null) {
+			for (Document docClasses : documentsClasses) {
+				classes.add(new Classes(document.getObjectId("_id"), docClasses.getString("description")));
+			}
+		}
 		hero.setClasses(classes);
 		hero.setObjectId(objectId);
 		hero.setPassword(password);

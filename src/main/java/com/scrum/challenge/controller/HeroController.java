@@ -43,14 +43,13 @@ public class HeroController {
 	}
 
 	private void addSkillList(ModelAndView modelAndView) {
-		Map<String, String> skills = new HashMap<>();
-		for (Skills sk : Arrays.asList(Skills.values())) {
-			skills.put(sk.name(), sk.getDescription());
-		}
-		modelAndView.addObject("skills", skills);
-		Map<String, String> mapClasses = new HashMap<>();
+		List<Skills> skillsList = Arrays.asList(Skills.values());
 		List<Classes> classes = classesService.findAll();
+		Map<String, String> skills = new HashMap<>();
+		Map<String, String> mapClasses = new HashMap<>();
+		skillsList.forEach(s -> skills.put(s.name(), s.getDescription()));
 		classes.forEach(c -> mapClasses.put(c.getObjectId().toHexString(), c.getDescription()));
+		modelAndView.addObject("skills", skills);
 		modelAndView.addObject("classes", mapClasses);
 	}
 	
@@ -80,7 +79,7 @@ public class HeroController {
 	
 	@GetMapping(value = "edit/{id}")
 	public ModelAndView editHero(@PathVariable("id")ObjectId id) {
-		ModelAndView modelAndView = new ModelAndView("hero/edit");
+		ModelAndView modelAndView = new ModelAndView("hero/form");
 		addSkillList(modelAndView);
 		modelAndView.addObject("hero", heroService.findById(id));
 		return modelAndView;

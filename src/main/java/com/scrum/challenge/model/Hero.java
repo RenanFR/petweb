@@ -3,6 +3,8 @@ package com.scrum.challenge.model;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -94,6 +96,18 @@ public class Hero implements UserDetails	{
 	
 	public List<Skills> getSkills() {
 		return skills;
+//		if (skills == null) {
+//			return null;
+//		}
+//		return skillsToMap();
+	}
+
+	public Map<String, String> skillsToMap() {
+		return skills.stream().collect(Collectors.toMap(s -> s.name(), s -> s.getDescription()));
+	}
+	
+	public List<Skills> skillsToList() {
+		return skills;
 	}
 
 	public void setSkills(List<Skills> skills) {
@@ -101,6 +115,20 @@ public class Hero implements UserDetails	{
 	}
 
 	public List<Classes> getClasses() {
+		return classes;
+	}
+//		if (classes == null) {
+//			return null;
+//		}
+//		return classesToMap();
+//	}
+
+	public Map<String, String> classesToMap() {
+		Map<String, String> collect = classes.stream().collect(Collectors.toMap(c -> c.getObjectId().toHexString(), c -> c.getDescription()));
+		return collect;
+	}
+	
+	public List<Classes> classesToList() {
 		return classes;
 	}
 

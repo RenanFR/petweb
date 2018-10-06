@@ -4,7 +4,7 @@ import org.bson.Document;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class SkillsConverter implements Converter<Document, String>{
 
 	@Override
