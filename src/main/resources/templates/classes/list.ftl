@@ -32,9 +32,9 @@
 					<#list classesList as c>
 					<tr>
 					    <td>
-					    	<a href="${context}/delete/${c.objectId}" class="delete" data-id="${c.objectId}"><i class="fa fa-trash fa-2x"></i></a>
-					    	<a href="${context}/edit/${c.objectId}" class="edit" data-id="${c.objectId}"><i class="fa fa-edit fa-2x"></i></a>
-						    <a href="${context}/${c.objectId}">
+					    	<a href="${context}/delete/${c.objectId!c.id}" class="delete" data-id="${c.objectId!c.id}"><i class="fa fa-trash fa-2x"></i></a>
+					    	<a href="${context}/edit/${c.objectId!c.id}" class="edit" data-id="${c.objectId!c.id}"><i class="fa fa-edit fa-2x"></i></a>
+						    <a href="${context}/${c.objectId!c.id}">
 							    <i class="fa fa-ellipsis-h"></i>
 						    </a>
 					    </td>
